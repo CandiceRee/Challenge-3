@@ -1,26 +1,50 @@
+var generatebtn=document.getElementById("#generate");
+
+var uppercase= ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+var lowercase=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var symbols= ["!","@","#","$","%","^","&","*","(",")","_","+","~","`","-","=","{","}","|","[","]",":",";","'","<",">","?",",",".","/"];
+var numbers = ["0","1","2","3","4","5","6","7","8","9"];
+var randomuppercase = uppercase[Math.floor(Math.random()*uppercase.length)];
+ var randomlowercase = lowercase[Math.floor(Math.random()*lowercase.length)];
+ var randomnumber = numbers[Math.floor(Math.random()*numbers.length)];
+var randomsymbol = symbols[Math.floor(Math.random()*symbols.length)];
+console.log(randomuppercase);
+console.log(randomlowercase);
+console.log(randomnumber);
+console.log(randomsymbol);
+
 var password =window.prompt("How many characters will your password contain?");
-var password1=window.confirm("Any uppercase letters?");
-var password2=window.confirm("Any lowercase letters?");
-var password3=window.confirm("Any numbers?");
-var password4=window.confirm("Any special characters?");
+var uppercaseConfirmed=window.confirm("Any uppercase letters?");
+var lowecaseConfirmed=window.confirm("Any lowercase letters?");
+var numbersConfirmed=window.confirm("Any numbers?");
+var symbolsConfirmed=window.confirm("Any special characters?");
 
-var characters2=("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`-={}|[]:;'<>?,./");
-var lowercase2= ("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`-={}|[]:;'<>?,./");
-var uppercase2=("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`-={}|[]:;'<>?,./");
-var numbers2= ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+~`-={}|[]:;'<>?,./");
-var symbols2 = ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
-
-for (var i=0; i<=7; i++){
-  var randomnumber = Math.floor(Math.random()*characters2.length);
-  var randomnumber1 = Math.floor(Math.random()*lowercase2.length);
-  var randomnumber2 = Math.floor(Math.random()*uppercase2.length);
-  var randomnumber3 = Math.floor(Math.random()*numbers2.length);
-  var randomnumber4 = Math.floor(Math.random()*symbols2.length);
-  password += characters2.substring(randomnumber,randomnumber+1);
-  password1 += lowercase2.substring(randomnumber1,randomnumber1+1);
-  password2 += uppercase2.substring(randomnumber2,randomnumber2+1);
-  password3 += numbers2.substring(randomnumber3, randomnumber3+1);
-  password4 += symbols2.substring(randomnumber3,randomnumber4+1);
+function generatepassword(){
+//Array that holds user input (at least one)
+var defaultC = [];
+var remainingC=[];
+if(uppercaseConfirmed){
+  defaultC.push(randomuppercase);
+remainingC=remainingC.concat(uppercase);
+}else if(lowecaseConfirmed){
+  defaultC.push(randomlowercase);
+  remainingC=remainingC.concat(lowercase);
+}else if(numbersConfirmed){
+  defaultC.push(randomnumber);
+  remainingC=remainingC.concat(numbers);
+}else if(symbolsConfirmed){
+defaultC.push(randomsymbol);
+remainingC=remainingC.concat(symbols);
 }
-document.getElementById("password").value=password,password1,password2,password3,password4;
+}
+
+
+for (var i=0; i<=password; i++){
+  
+  lowecaseConfirmed += lowercase.substring(randomlowercase);
+  uppercaseConfirmed += uppercase.substring(randomuppercase);
+  numbersConfirmed += numbers.substring(randomnumber);
+  symbolsConfirmed += symbols.substring(randomsymbol);
+}
+generatebtn.addEventListener("click", generatepassword)
 
